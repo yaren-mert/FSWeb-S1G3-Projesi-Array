@@ -40,8 +40,8 @@ Aşağıdakileri yapmak için aşağıdaki kopyalama işlevini kullanın:
 */
 
 
-function kopyala(/*kod buraya*/){
-  /*kod buraya*/
+function kopyala(dizi) {
+  return[...dizi]
 }
 
 
@@ -56,8 +56,12 @@ Bir dizinin tam olarak 25 çeşit olduğunu onaylayın. İşleviniz şunları ka
 */
 
 
-function dizi25Cesitmi(/*kod buraya*/){
-  /*kod buraya*/
+function dizi25Cesitmi(dizi) {
+  if(dizi.lenght === 25) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 
@@ -73,11 +77,12 @@ Aşağıdakileri yapmak için cesitEkle işlevini kullanın:
   Örneğin: cesitEkle(orijinalTatlar, "Kakule") işlevi doğru çalıştığında ["Kakule", "Muz",..."Vanilya"] şeklinde dönmelidir
 */
 
-
-function cesitEkle(/*kod buraya*/){
-  /*kod buraya*/
+function cesitEkle(orijinalTatlar, eklenecekLezzet){
+  orijinalTatlar.unshift(eklenecekLezzet)
+  return orijinalTatlar;
 }
-
+let eklenecekLezzet = "Kakule"
+cesitEkle(orijinalTatlar,eklenecekLezzet);
 
 /* Cörev 4:
 
@@ -91,11 +96,12 @@ Aşağıdakileri yapmak için sonCesitiKaldir işlevini kullanın:
    Örneğin: sonCesitiKaldir(orijinalTatlar) çalıştırıldığında ["Kakule", "Muz",..."Çilek"] döndürülür.
 */
 
-
-function sonCesitiKaldir(/*kod buraya*/){
-  /*kod buraya*/
+function sonCesitiKaldir(orijinalTatlar){
+  orijinalTatlar.pop();  
+  return orijinalTatlar;
 }
 
+sonCesitiKaldir(orijinalTatlar);
 
 /* Görev 5:
 Dizideki belirli bir indeksteki çeşniyi döndüren bir işlev yazın.
@@ -108,10 +114,10 @@ Aşağıdakileri yapmak için aşağıdaki indekstekiCesitiGetir işlevini kulla
    Örneğin: indekstekiCesitiGetir(orijinalTatlar, 2) çalıştırılmasıyla, Kakule'in başarıyla eklendiği varsayarsak sonuç "Ceviz" olucaktır.
 */
 
-function indekstekiCesitiGetir(/*kod buraya*/){
-  /*kod buraya*/
+function indekstekiCesitiGetir(dizi,index){
+  return dizi[index];
 }
-
+console.log(indekstekiCesitiGetir(orijinalTatlar,2));
 
 /* Görev 6:
 
@@ -127,11 +133,18 @@ Aşağıdakileri yapmak için ismeGoreCesitCikar işlevini kullanın:
 
   İPUCU: Bunun için .splice() kullanabilirsiniz.
 */
-
-function ismeGoreCesitCikar(/*kod buraya*/){
-  /*kod buraya*/
+function ismeGoreCesitCikar(orijinalTatlar, lezzetAdi){
+  for (let i = 0; i<orijinalTatlar.length; i++){
+  if (orijinalTatlar[i]===lezzetAdi){
+    orijinalTatlar.splice(i,1);
+    return orijinalTatlar;
+    } 
+  }
+  return orijinalTatlar;
 }
 
+let lezzetAdi = "Limon";
+ismeGoreCesitCikar(orijinalTatlar, lezzetAdi);
 
 /* Görev 7:
 
@@ -154,10 +167,15 @@ Aşağıdakileri yapmak için ismeGoreFiltrele işlevini kullanın:
 */
 
 
-function ismeGoreFiltrele(/*kod buraya*/){
-  /*kod buraya*/
-}
+let arananKelime = "Çikolata"
 
+function ismeGoreFiltrele(orijinalTatlar, arananKelime){
+  
+  let x = orijinalTatlar.filter(function (orijinalTatlar){
+  return orijinalTatlar.includes(arananKelime);
+})
+ return x;
+}
 
 
 /* ALIŞTIRMA */
@@ -171,11 +189,61 @@ Aşağıdakileri yapmak için ortalamaKelimeSayisi işlevini kullanın:
 
    Örneğin: ortalamaKelimeSayisi(orijinalTatlar) 0 ile 2 arasında bir sayı döndürmelidir.
 */
-
-function ortalamaKelimeSayisi(/*kod buraya*/){
-  /*kod buraya*/
+function ortalamaKelimeSayisi(orijinalTatlar){
+  let boslukSayisi=0;
+  let kelimeSayisi =[];
+  let toplamKelimeSayisi = 0;
+  for (let i = 0; i<orijinalTatlar.length; i++){
+    for(let j = 0; j<orijinalTatlar[i].length; j ++){
+      if (orijinalTatlar[i].charAt(j)===" "){
+        boslukSayisi = boslukSayisi + 1;
+      }
+    }
+    kelimeSayisi.push(boslukSayisi+1);
+    boslukSayisi = 0;
+  }
+ for (let k = 0; k<kelimeSayisi.length; k++){
+    toplamKelimeSayisi = toplamKelimeSayisi + kelimeSayisi[k];
+ }
+ console.log(kelimeSayisi);
+ return toplamKelimeSayisi/kelimeSayisi.length;
 }
 
+
+function ortalamaHeceSayisi(orijinalTatlar){
+  let sesliHarfSayisi=0;
+  let heceSayisi =[];
+  let toplamHeceSayisi = 0;
+  for (let i = 0; i<orijinalTatlar.length; i++){
+    for(let j = 0; j<orijinalTatlar[i].length; j ++){
+      if (orijinalTatlar[i].charAt(j)==="a"||
+      orijinalTatlar[i].charAt(j)==="A"||
+      orijinalTatlar[i].charAt(j)==="e"||
+      orijinalTatlar[i].charAt(j)==="E"||
+      orijinalTatlar[i].charAt(j)==="ı"||
+      orijinalTatlar[i].charAt(j)==="I"||
+      orijinalTatlar[i].charAt(j)==="i"||
+      orijinalTatlar[i].charAt(j)==="İ"||
+      orijinalTatlar[i].charAt(j)==="o"||
+      orijinalTatlar[i].charAt(j)==="O"||
+      orijinalTatlar[i].charAt(j)==="ö"||
+      orijinalTatlar[i].charAt(j)==="Ö"||
+      orijinalTatlar[i].charAt(j)==="u"||
+      orijinalTatlar[i].charAt(j)==="U"||
+      orijinalTatlar[i].charAt(j)==="ü"||
+      orijinalTatlar[i].charAt(j)==="Ü"){
+        sesliHarfSayisi = sesliHarfSayisi + 1;
+      }
+    }
+    heceSayisi.push(sesliHarfSayisi);
+    sesliHarfSayisi = 0;
+  }
+ for (let k = 0; k<heceSayisi.length; k++){
+    toplamHeceSayisi = toplamHeceSayisi + heceSayisi[k];
+ }
+ 
+ return toplamHeceSayisi/heceSayisi.length;
+}
 
 /* ALIŞTIRMA 2:
 Firma mevcut tatların yanında artık mevsimlik lezzetler ve hatta bölgesel lezzetler de sunmaktadır. Toplam 25 lezzet aromasını
@@ -190,8 +258,27 @@ Aşağıdakileri yapmak için rastgeleTatlar işlevini ve yeni dizileri kullanı
 */
 
 
-function rastgeleTatlar(/*kod buraya*/){
-  /*kod buraya*/
+function rastgeleTatlar(orijinalTatlar, yeniTatlar, mevsimlikTatlar, bolgeselTatlar){
+  let rastgeleTatlar = [];
+  let randomListe = 0;
+  let randomIndex = 0;
+  for (let i = 0; i < 25; i++){
+    randomListe = Math.ceil(Math.random()*4);
+    if (randomListe===1){
+      randomIndex = Math.floor(Math.random()*orijinalTatlar.length);
+      rastgeleTatlar.push(orijinalTatlar[randomIndex]);
+    } else if(randomListe===2){
+      randomIndex = Math.floor(Math.random()*yeniTatlar.length);
+      rastgeleTatlar.push(yeniTatlar[randomIndex]);
+    } else if(randomListe===3){
+      randomIndex = Math.floor(Math.random()*mevsimlikTatlar.length);
+      rastgeleTatlar.push(mevsimlikTatlar[randomIndex]);
+    } else {
+      randomIndex = Math.floor(Math.random()*bolgeselTatlar.length);
+      rastgeleTatlar.push(bolgeselTatlar[randomIndex]);
+    }
+  }
+  return rastgeleTatlar;
 }
 
 // NEW DATA ARRAYS FOR STRETCH 2 ⬇️
